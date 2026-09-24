@@ -10,7 +10,7 @@
     <meta property="og:title" content="SALINK — Emergency Social Platform">
     <meta property="og:description" content="Satu Aplikasi. Ribuan Nyawa. Terlindungi.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/logo.png">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzFtU38jznKrKLKAzs_RTM1fI5BM5ZDHZIG236oEKBW-sasEgeoM9Bzd5oADyihQ8zUMwTgNcuhiN8O46l7AFHp0WqJIL3_I6Je6LZp9kWdfrapGAzFhH57krnca0hyhpMfhHo9ajClsuj1E4NddbFY1sdgoyRaeBUST4lMBNyicx02Az3aDkSyZ-G/s1280/1000988184.png">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SALINK — Emergency Social Platform">
@@ -2471,22 +2471,28 @@
             pointer-events: none;
         }
 
+        /* Founder Avatar — sekarang pakai foto profil */
         .founder-avatar {
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--white);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.2);
-            border: 3px solid rgba(6, 182, 212, 0.3);
+            overflow: hidden;
             position: relative;
             flex-shrink: 0;
+            box-shadow:
+                0 0 40px rgba(6, 182, 212, 0.25),
+                0 0 0 3px rgba(6, 182, 212, 0.3),
+                0 0 0 6px rgba(239, 68, 68, 0.15);
+            background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
+            transition: transform var(--transition-med), box-shadow var(--transition-med);
+        }
+
+        .founder-avatar:hover {
+            transform: scale(1.03);
+            box-shadow:
+                0 0 60px rgba(6, 182, 212, 0.4),
+                0 0 0 3px rgba(6, 182, 212, 0.5),
+                0 0 0 6px rgba(239, 68, 68, 0.25);
         }
 
         .founder-avatar::after {
@@ -2494,8 +2500,40 @@
             position: absolute;
             inset: -8px;
             border-radius: 50%;
-            border: 2px solid rgba(239, 68, 68, 0.3);
+            border: 2px solid rgba(239, 68, 68, 0.35);
             animation: ringRotate 8s linear infinite;
+            pointer-events: none;
+        }
+
+        .founder-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-avatar .avatar-fallback {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            z-index: 0;
+        }
+
+        .founder-avatar.img-error img {
+            display: none;
+        }
+
+        .founder-avatar.img-error .avatar-fallback {
+            display: flex;
         }
 
         .founder-info h3 {
@@ -2563,8 +2601,10 @@
             }
             .founder-avatar {
                 margin: 0 auto;
-                width: 110px;
-                height: 110px;
+                width: 120px;
+                height: 120px;
+            }
+            .founder-avatar .avatar-fallback {
                 font-size: 2rem;
             }
             .founder-quote {
@@ -4074,7 +4114,7 @@
 <div class="section-divider"></div>
 
 <!-- ============================================================
-     FOUNDER
+     FOUNDER — FOTO PROFIL SUDAH DIGANTI
      ============================================================ -->
 <section class="section" id="founder">
     <div class="container">
@@ -4083,7 +4123,16 @@
             <h2 class="section-title">BUILT WITH PURPOSE.</h2>
         </div>
         <div class="founder-card reveal reveal-delay-2">
-            <div class="founder-avatar">KL</div>
+            <!-- Founder Avatar — sekarang pakai foto profil dari link -->
+            <div class="founder-avatar" id="founder-avatar">
+                <img
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmcR8ae99_AoQW3-Qo88ES5_Ycl6kiPeP8orrwkY7FCUV5dCZ_3S6kt9p8mol4Penn9lRNk5C7WdK7Yzqc5B90viyCF8zD2E7ltzEY6Vm90pGYWFYrjDHYrCqLWniLnMUHbsXlJJ5pLWlFE1eyyZFhBCD_2Y9JeoRaW-eUvM7_HP4doWNZpM4_JexJ/s1280/1000996866.png"
+                    alt="Foto profil Kang L — Founder & Developer SALINK"
+                    loading="lazy"
+                    id="founder-photo"
+                >
+                <span class="avatar-fallback">KL</span>
+            </div>
             <div class="founder-info">
                 <h3>KANG L</h3>
                 <p class="founder-role">Founder & Developer SALINK</p>
@@ -4301,7 +4350,9 @@ const SALINK_CONFIG = {
     contact: {
         email: "teslasmartonlineshop@gmail.com",
         whatsapp: "+62 852-1848-3129"
-    }
+    },
+    // Foto profil founder — bisa diganti admin kapan saja
+    founderPhoto: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzFtU38jznKrKLKAzs_RTM1fI5BM5ZDHZIG236oEKBW-sasEgeoM9Bzd5oADyihQ8zUMwTgNcuhiN8O46l7AFHp0WqJIL3_I6Je6LZp9kWdfrapGAzFhH57krnca0hyhpMfhHo9ajClsuj1E4NddbFY1sdgoyRaeBUST4lMBNyicx02Az3aDkSyZ-G/s1280/1000988184.png"
 };
 // DEMO DATA — Replace with verified production data before public launch.
 
@@ -4602,7 +4653,6 @@ const SALINK_CONFIG = {
     let autoplayInterval;
 
     if (slides.length) {
-        // Create dots
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -4696,7 +4746,6 @@ const SALINK_CONFIG = {
         document.body.classList.remove('no-scroll');
     }
 
-    // Open modal triggers
     document.getElementById('sos-btn').addEventListener('click', openModal);
     document.getElementById('float-sos').addEventListener('click', openModal);
     document.getElementById('hero-sos-btn').addEventListener('click', (e) => {
@@ -4712,7 +4761,6 @@ const SALINK_CONFIG = {
         openModal();
     });
 
-    // Category selection
     catBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             catBtns.forEach(b => {
@@ -4726,10 +4774,8 @@ const SALINK_CONFIG = {
         });
     });
 
-    // Cancel
     modalCancel.addEventListener('click', closeModal);
 
-    // Confirm
     modalConfirm.addEventListener('click', () => {
         if (!selectedCategory) return;
 
@@ -4749,13 +4795,11 @@ const SALINK_CONFIG = {
         showToast('🚨', 'Emergency Alert Terkirim', `Kategori: ${selectedCategory}. Tim respons sedang menuju lokasi Anda (simulasi).`);
     });
 
-    // Close success
     modalCloseSuccess.addEventListener('click', () => {
         closeModal();
         showToast('✅', 'Status Diperbarui', 'Emergency alert telah diproses. Tetap tenang dan ikuti instruksi tim respons.');
     });
 
-    // Close modal on overlay click
     emergencyModal.addEventListener('click', (e) => {
         if (e.target === emergencyModal) closeModal();
     });
@@ -4796,7 +4840,6 @@ const SALINK_CONFIG = {
         return toast;
     }
 
-    // Welcome toasts (delayed)
     setTimeout(() => {
         showToast('🟢', 'SALINK', 'Emergency network ready.');
     }, 2500);
@@ -4827,7 +4870,6 @@ const SALINK_CONFIG = {
 
             let valid = true;
 
-            // Name
             if (!nameInput.value.trim()) {
                 nameGroup.classList.add('error');
                 valid = false;
@@ -4835,7 +4877,6 @@ const SALINK_CONFIG = {
                 nameGroup.classList.remove('error');
             }
 
-            // Email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailInput.value.trim())) {
                 emailGroup.classList.add('error');
@@ -4844,7 +4885,6 @@ const SALINK_CONFIG = {
                 emailGroup.classList.remove('error');
             }
 
-            // Message
             if (!messageInput.value.trim()) {
                 messageGroup.classList.add('error');
                 valid = false;
@@ -4860,7 +4900,6 @@ const SALINK_CONFIG = {
             }
         });
 
-        // Real-time validation clear
         ['contact-name', 'contact-email', 'contact-message'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -4953,17 +4992,36 @@ const SALINK_CONFIG = {
     });
 
     /* ----------------------------------------------------------
-       20. PERFORMANCE — LAZY INIT
+       20. FOUNDER PHOTO FALLBACK + CONFIG SYNC
+       ---------------------------------------------------------- */
+    const founderAvatar = document.getElementById('founder-avatar');
+    const founderPhoto = document.getElementById('founder-photo');
+
+    // Sync foto dari SALINK_CONFIG jika ada
+    if (founderPhoto && SALINK_CONFIG.founderPhoto) {
+        founderPhoto.src = SALINK_CONFIG.founderPhoto;
+    }
+
+    if (founderPhoto) {
+        founderPhoto.addEventListener('error', () => {
+            if (founderAvatar) founderAvatar.classList.add('img-error');
+        });
+
+        // Jika gambar sudah di-cache dan gagal load
+        if (founderPhoto.complete && founderPhoto.naturalWidth === 0) {
+            if (founderAvatar) founderAvatar.classList.add('img-error');
+        }
+    }
+
+    /* ----------------------------------------------------------
+       21. PERFORMANCE — LAZY INIT
        ---------------------------------------------------------- */
     window.addEventListener('load', () => {
-        // Remove loading no-scroll if already done
-        if (!loadingScreen.classList.contains('hidden')) {
-            // Safety fallback
-        }
+        // fallback jika loading screen belum hilang
     });
 
     /* ----------------------------------------------------------
-       21. LUCIDE ICONS INIT
+       22. LUCIDE ICONS INIT
        ---------------------------------------------------------- */
     if (window.lucide) {
         window.lucide.createIcons();
@@ -4971,5 +5029,6 @@ const SALINK_CONFIG = {
 
 })();
 </script>
+
 </body>
 </html>
