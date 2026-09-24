@@ -10,7 +10,7 @@
     <meta property="og:title" content="SALINK — Emergency Social Platform">
     <meta property="og:description" content="Satu Aplikasi. Ribuan Nyawa. Terlindungi.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzFtU38jznKrKLKAzs_RTM1fI5BM5ZDHZIG236oEKBW-sasEgeoM9Bzd5oADyihQ8zUMwTgNcuhiN8O46l7AFHp0WqJIL3_I6Je6LZp9kWdfrapGAzFhH57krnca0hyhpMfhHo9ajClsuj1E4NddbFY1sdgoyRaeBUST4lMBNyicx02Az3aDkSyZ-G/s1280/1000988184.png">
+    <meta property="og:image" content="assets/logo.png">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SALINK — Emergency Social Platform">
@@ -47,6 +47,7 @@
             --blue-glow: rgba(37, 99, 235, 0.35);
             --cyan-500: #06b6d4;
             --cyan-400: #22d3ee;
+            --cyan-300: #67e8f9;
             --cyan-glow: rgba(6, 182, 212, 0.3);
             --white: #ffffff;
             --slate-200: #e2e8f0;
@@ -2443,7 +2444,7 @@
         }
 
         /* ============================================================
-           FOUNDER
+           FOUNDER — UPDATED WITH PROFILE PHOTO
            ============================================================ */
         .founder-card {
             display: grid;
@@ -2471,19 +2472,22 @@
             pointer-events: none;
         }
 
-        /* Founder Avatar — sekarang pakai foto profil */
+        /* Founder avatar container — dapat memuat foto profil atau fallback inisial */
         .founder-avatar {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            overflow: hidden;
             position: relative;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
             box-shadow:
                 0 0 40px rgba(6, 182, 212, 0.25),
-                0 0 0 3px rgba(6, 182, 212, 0.3),
-                0 0 0 6px rgba(239, 68, 68, 0.15);
-            background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
+                0 0 80px rgba(6, 182, 212, 0.1);
+            border: 3px solid rgba(6, 182, 212, 0.35);
+            overflow: hidden;
             transition: transform var(--transition-med), box-shadow var(--transition-med);
         }
 
@@ -2491,49 +2495,59 @@
             transform: scale(1.03);
             box-shadow:
                 0 0 60px rgba(6, 182, 212, 0.4),
-                0 0 0 3px rgba(6, 182, 212, 0.5),
-                0 0 0 6px rgba(239, 68, 68, 0.25);
+                0 0 100px rgba(6, 182, 212, 0.15);
         }
 
+        /* Rotating decorative ring */
         .founder-avatar::after {
             content: '';
             position: absolute;
-            inset: -8px;
+            inset: -10px;
             border-radius: 50%;
-            border: 2px solid rgba(239, 68, 68, 0.35);
-            animation: ringRotate 8s linear infinite;
+            border: 2px solid transparent;
+            border-top-color: rgba(239, 68, 68, 0.6);
+            border-right-color: rgba(6, 182, 212, 0.5);
+            animation: ringRotate 10s linear infinite;
             pointer-events: none;
+            z-index: 2;
         }
 
+        /* Foto profil founder */
         .founder-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
+            border-radius: 50%;
             display: block;
             position: relative;
             z-index: 1;
+            transition: transform 0.4s ease;
         }
 
-        .founder-avatar .avatar-fallback {
+        .founder-avatar img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Fallback inisial jika foto gagal dimuat */
+        .founder-initials {
             position: absolute;
             inset: 0;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             font-family: var(--font-heading);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             color: var(--white);
             z-index: 0;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
         }
 
-        .founder-avatar.img-error img {
+        /* Sembunyikan inisial saat foto berhasil dimuat */
+        .founder-avatar img.loaded ~ .founder-initials {
             display: none;
-        }
-
-        .founder-avatar.img-error .avatar-fallback {
-            display: flex;
         }
 
         .founder-info h3 {
@@ -2601,11 +2615,11 @@
             }
             .founder-avatar {
                 margin: 0 auto;
-                width: 120px;
-                height: 120px;
+                width: 130px;
+                height: 130px;
             }
-            .founder-avatar .avatar-fallback {
-                font-size: 2rem;
+            .founder-initials {
+                font-size: 2.2rem;
             }
             .founder-quote {
                 border-left: none;
@@ -4114,7 +4128,7 @@
 <div class="section-divider"></div>
 
 <!-- ============================================================
-     FOUNDER — FOTO PROFIL SUDAH DIGANTI
+     FOUNDER — UPDATED WITH PROFILE PHOTO
      ============================================================ -->
 <section class="section" id="founder">
     <div class="container">
@@ -4123,15 +4137,17 @@
             <h2 class="section-title">BUILT WITH PURPOSE.</h2>
         </div>
         <div class="founder-card reveal reveal-delay-2">
-            <!-- Founder Avatar — sekarang pakai foto profil dari link -->
+            <!-- Founder Avatar: foto profil dapat diganti admin -->
             <div class="founder-avatar" id="founder-avatar">
                 <img
+                    id="founder-photo"
                     src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaDd41vi8-fo8HYvHZilnR_N8WzphH5JJ2XvYZD2SG0suHPkGmnD1domdbdhGTtwvEkLEr40bgXtdfRlcvfP-Mtp6rsY9QEdRhg_zFST8-x2m8pgC4gEcBRPa-yKSGS_PVo9qRx8GU2o76FQXAoRmNJSHWjHu0CS3MOB-DkgVx5lglY7TDiHxovnpY/s1280/1000996943.png"
                     alt="Foto profil Kang L — Founder & Developer SALINK"
-                    loading="lazy"
-                    id="founder-photo"
+                    loading="eager"
+                    decoding="async"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 >
-                <span class="avatar-fallback">KL</span>
+                <div class="founder-initials" style="display:none;">KL</div>
             </div>
             <div class="founder-info">
                 <h3>KANG L</h3>
@@ -4335,6 +4351,11 @@
 /* ============================================================
    SALINK CONFIG — DEMO DATA
    Replace with verified production data before public launch.
+
+   === CARA GANTI FOTO FOUNDER (ADMIN) ===
+   1. Ubah URL di SALINK_CONFIG.founder.photo di bawah ini, ATAU
+   2. Ubah langsung atribut src pada <img id="founder-photo"> di HTML.
+   Jika URL kosong / gagal dimuat, otomatis fallback ke inisial "KL".
    ============================================================ */
 const SALINK_CONFIG = {
     statistics: {
@@ -4351,8 +4372,14 @@ const SALINK_CONFIG = {
         email: "teslasmartonlineshop@gmail.com",
         whatsapp: "+62 852-1848-3129"
     },
-    // Foto profil founder — bisa diganti admin kapan saja
-    founderPhoto: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzFtU38jznKrKLKAzs_RTM1fI5BM5ZDHZIG236oEKBW-sasEgeoM9Bzd5oADyihQ8zUMwTgNcuhiN8O46l7AFHp0WqJIL3_I6Je6LZp9kWdfrapGAzFhH57krnca0hyhpMfhHo9ajClsuj1E4NddbFY1sdgoyRaeBUST4lMBNyicx02Az3aDkSyZ-G/s1280/1000988184.png"
+    founder: {
+        name: "KANG L",
+        role: "Founder & Developer SALINK",
+        organization: "Karang Taruna",
+        initials: "KL",
+        // GANTI URL DI BAWAH INI UNTUK MENGUBAH FOTO PROFIL FOUNDER
+        photo: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaDd41vi8-fo8HYvHZilnR_N8WzphH5JJ2XvYZD2SG0suHPkGmnD1domdbdhGTtwvEkLEr40bgXtdfRlcvfP-Mtp6rsY9QEdRhg_zFST8-x2m8pgC4gEcBRPa-yKSGS_PVo9qRx8GU2o76FQXAoRmNJSHWjHu0CS3MOB-DkgVx5lglY7TDiHxovnpY/s1280/1000996943.png"
+    }
 };
 // DEMO DATA — Replace with verified production data before public launch.
 
@@ -4361,6 +4388,50 @@ const SALINK_CONFIG = {
    ============================================================ */
 (function() {
     'use strict';
+
+    /* ----------------------------------------------------------
+       0. FOUNDER PHOTO — ADMIN CONFIG APPLIER
+       ---------------------------------------------------------- */
+    (function applyFounderPhoto() {
+        const img = document.getElementById('founder-photo');
+        const initials = document.querySelector('.founder-initials');
+        if (!img) return;
+
+        // Terapkan URL dari config jika ada (override HTML)
+        if (SALINK_CONFIG.founder && SALINK_CONFIG.founder.photo) {
+            img.src = SALINK_CONFIG.founder.photo;
+        }
+
+        // Pastikan inisial fallback juga dari config
+        if (initials && SALINK_CONFIG.founder && SALINK_CONFIG.founder.initials) {
+            initials.textContent = SALINK_CONFIG.founder.initials;
+        }
+
+        // Handler sukses load → tampilkan img, sembunyikan inisial
+        img.addEventListener('load', function() {
+            img.classList.add('loaded');
+            img.style.display = 'block';
+            if (initials) initials.style.display = 'none';
+        });
+
+        // Handler error → sembunyikan img, tampilkan inisial
+        img.addEventListener('error', function() {
+            img.style.display = 'none';
+            if (initials) initials.style.display = 'flex';
+        });
+
+        // Jika gambar sudah ter-cache sebelum handler terpasang
+        if (img.complete) {
+            if (img.naturalWidth > 0) {
+                img.classList.add('loaded');
+                img.style.display = 'block';
+                if (initials) initials.style.display = 'none';
+            } else {
+                img.style.display = 'none';
+                if (initials) initials.style.display = 'flex';
+            }
+        }
+    })();
 
     /* ----------------------------------------------------------
        1. LOADING SCREEN
@@ -4416,7 +4487,7 @@ const SALINK_CONFIG = {
         }
         animateRing();
 
-        const hoverTargets = document.querySelectorAll('a, button, .adv-card, .strip-card, .step-card, .benefit-card, .map-loc-card, .tab-btn, .social-card, .contact-card, .trust-item');
+        const hoverTargets = document.querySelectorAll('a, button, .adv-card, .strip-card, .step-card, .benefit-card, .map-loc-card, .tab-btn, .social-card, .contact-card, .trust-item, .founder-avatar');
         hoverTargets.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorDot.classList.add('hover');
@@ -4455,7 +4526,6 @@ const SALINK_CONFIG = {
        4. NAVBAR
        ---------------------------------------------------------- */
     const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
@@ -4464,7 +4534,6 @@ const SALINK_CONFIG = {
         } else {
             navbar.classList.remove('scrolled');
         }
-        lastScroll = y;
     }, { passive: true });
 
     // Active nav link
@@ -4992,36 +5061,7 @@ const SALINK_CONFIG = {
     });
 
     /* ----------------------------------------------------------
-       20. FOUNDER PHOTO FALLBACK + CONFIG SYNC
-       ---------------------------------------------------------- */
-    const founderAvatar = document.getElementById('founder-avatar');
-    const founderPhoto = document.getElementById('founder-photo');
-
-    // Sync foto dari SALINK_CONFIG jika ada
-    if (founderPhoto && SALINK_CONFIG.founderPhoto) {
-        founderPhoto.src = SALINK_CONFIG.founderPhoto;
-    }
-
-    if (founderPhoto) {
-        founderPhoto.addEventListener('error', () => {
-            if (founderAvatar) founderAvatar.classList.add('img-error');
-        });
-
-        // Jika gambar sudah di-cache dan gagal load
-        if (founderPhoto.complete && founderPhoto.naturalWidth === 0) {
-            if (founderAvatar) founderAvatar.classList.add('img-error');
-        }
-    }
-
-    /* ----------------------------------------------------------
-       21. PERFORMANCE — LAZY INIT
-       ---------------------------------------------------------- */
-    window.addEventListener('load', () => {
-        // fallback jika loading screen belum hilang
-    });
-
-    /* ----------------------------------------------------------
-       22. LUCIDE ICONS INIT
+       20. LUCIDE ICONS INIT
        ---------------------------------------------------------- */
     if (window.lucide) {
         window.lucide.createIcons();
