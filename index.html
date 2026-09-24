@@ -2444,7 +2444,7 @@
         }
 
         /* ============================================================
-           FOUNDER — UPDATED WITH PROFILE PHOTO
+           FOUNDER
            ============================================================ */
         .founder-card {
             display: grid;
@@ -2472,7 +2472,6 @@
             pointer-events: none;
         }
 
-        /* Founder avatar container — dapat memuat foto profil atau fallback inisial */
         .founder-avatar {
             position: relative;
             width: 160px;
@@ -2498,7 +2497,6 @@
                 0 0 100px rgba(6, 182, 212, 0.15);
         }
 
-        /* Rotating decorative ring */
         .founder-avatar::after {
             content: '';
             position: absolute;
@@ -2512,7 +2510,6 @@
             z-index: 2;
         }
 
-        /* Foto profil founder */
         .founder-avatar img {
             width: 100%;
             height: 100%;
@@ -2529,7 +2526,6 @@
             transform: scale(1.05);
         }
 
-        /* Fallback inisial jika foto gagal dimuat */
         .founder-initials {
             position: absolute;
             inset: 0;
@@ -2545,7 +2541,6 @@
             background: linear-gradient(135deg, var(--blue-600), var(--cyan-500));
         }
 
-        /* Sembunyikan inisial saat foto berhasil dimuat */
         .founder-avatar img.loaded ~ .founder-initials {
             display: none;
         }
@@ -2629,6 +2624,275 @@
             }
             .founder-socials {
                 justify-content: center;
+            }
+        }
+
+        /* ============================================================
+           QR CODE SECTION — NEW
+           ============================================================ */
+        .qr-section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 0;
+        }
+
+        .qr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 50px;
+        }
+
+        .qr-card {
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            background: rgba(15, 29, 53, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qr-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity var(--transition-med);
+        }
+
+        .qr-card.qr-wa::before {
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 70%);
+        }
+
+        .qr-card.qr-app::before {
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12), transparent 70%);
+        }
+
+        .qr-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .qr-card.qr-wa:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.12);
+        }
+
+        .qr-card.qr-app:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.12);
+        }
+
+        .qr-card:hover::before {
+            opacity: 1;
+        }
+
+        .qr-card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-wa .qr-card-icon {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            box-shadow: 0 0 24px rgba(34, 197, 94, 0.15);
+        }
+
+        .qr-app .qr-card-icon {
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            box-shadow: 0 0 24px rgba(6, 182, 212, 0.15);
+        }
+
+        .qr-card-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-card-header p {
+            font-size: 0.85rem;
+            color: var(--slate-400);
+            line-height: 1.6;
+            max-width: 320px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .qr-image-wrapper {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            background: #ffffff;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: transform var(--transition-med), box-shadow var(--transition-med);
+        }
+
+        .qr-card:hover .qr-image-wrapper {
+            transform: scale(1.03);
+        }
+
+        .qr-wa:hover .qr-image-wrapper {
+            box-shadow:
+                0 12px 48px rgba(34, 197, 94, 0.25),
+                0 0 0 1px rgba(34, 197, 94, 0.2);
+        }
+
+        .qr-app:hover .qr-image-wrapper {
+            box-shadow:
+                0 12px 48px rgba(6, 182, 212, 0.25),
+                0 0 0 1px rgba(6, 182, 212, 0.2);
+        }
+
+        .qr-image-wrapper img {
+            width: 200px;
+            height: 200px;
+            display: block;
+            border-radius: 8px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .qr-url {
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.7rem;
+            color: var(--slate-500);
+            word-break: break-all;
+            max-width: 280px;
+            padding: 8px 14px;
+            border-radius: 50px;
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            position: relative;
+            z-index: 2;
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .qr-card:hover .qr-url {
+            color: var(--slate-300);
+        }
+
+        .qr-wa:hover .qr-url {
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .qr-app:hover .qr-url {
+            border-color: rgba(6, 182, 212, 0.2);
+        }
+
+        .qr-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 320px;
+            cursor: pointer;
+        }
+
+        .qr-action-btn:active {
+            transform: scale(0.97);
+        }
+
+        .qr-action-btn.qr-btn-wa {
+            color: var(--white);
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            box-shadow: 0 0 28px rgba(34, 197, 94, 0.3);
+        }
+
+        .qr-action-btn.qr-btn-wa:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 44px rgba(34, 197, 94, 0.5);
+        }
+
+        .qr-action-btn.qr-btn-app {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--cyan-500), var(--blue-600));
+            box-shadow: 0 0 28px rgba(6, 182, 212, 0.3);
+        }
+
+        .qr-action-btn.qr-btn-app:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 44px rgba(6, 182, 212, 0.5);
+        }
+
+        .qr-hint {
+            font-size: 0.72rem;
+            color: var(--slate-500);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 900px) {
+            .qr-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .qr-card {
+                padding: 28px 20px;
+            }
+            .qr-image-wrapper {
+                padding: 16px;
+            }
+            .qr-image-wrapper img {
+                width: 170px;
+                height: 170px;
+            }
+            .qr-card-header h3 {
+                font-size: 1.1rem;
+            }
+            .qr-action-btn {
+                font-size: 0.82rem;
+                padding: 12px 20px;
             }
         }
 
@@ -3311,9 +3575,9 @@
             <a href="#about" role="menuitem">About</a>
             <a href="#features" role="menuitem">Features</a>
             <a href="#emergency" role="menuitem">Emergency</a>
+            <a href="#qr-access" role="menuitem">QR Access</a>
             <a href="#how" role="menuitem">How It Works</a>
             <a href="#benefits" role="menuitem">Benefits</a>
-            <a href="#stats" role="menuitem">Statistics</a>
             <a href="#contact" role="menuitem">Contact</a>
         </div>
         <a href="#emergency" class="nav-cta" id="open-salink-nav">
@@ -3332,9 +3596,9 @@
     <a href="#about">About</a>
     <a href="#features">Features</a>
     <a href="#emergency">Emergency</a>
+    <a href="#qr-access">QR Access</a>
     <a href="#how">How It Works</a>
     <a href="#benefits">Benefits</a>
-    <a href="#stats">Statistics</a>
     <a href="#contact">Contact</a>
     <a href="#emergency" class="nav-cta">
         <i data-lucide="shield-alert" style="width:16px;height:16px;"></i>
@@ -3366,9 +3630,9 @@
                         <i data-lucide="alert-triangle" style="width:20px;height:20px;"></i>
                         Aktifkan SALINK
                     </a>
-                    <a href="#how" class="btn btn-secondary">
-                        Pelajari Cara Kerja
-                        <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+                    <a href="#qr-access" class="btn btn-secondary">
+                        Scan QR Code
+                        <i data-lucide="qr-code" style="width:18px;height:18px;"></i>
                     </a>
                 </div>
                 <p class="hero-micro reveal reveal-delay-5">
@@ -3447,6 +3711,103 @@
                 <div class="sc-icon">🛒</div>
                 <h4>Local Marketplace</h4>
                 <p>Bangun ekonomi komunitas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================================
+     QR CODE ACCESS SECTION — NEW
+     ============================================================ -->
+<section class="qr-section" id="qr-access">
+    <div class="container">
+        <div class="reveal" style="text-align:center;">
+            <p class="section-label" style="justify-content:center;">QR Access</p>
+            <h2 class="section-title">SCAN & TERHUBUNG.</h2>
+            <p class="section-subtitle" style="margin:0 auto;">
+                Dua QR Code untuk akses cepat: konsultasi langsung via WhatsApp atau install aplikasi SALINK di perangkat Anda.
+            </p>
+        </div>
+
+        <div class="qr-grid">
+            <!-- ============ QR CODE 1: WHATSAPP ============ -->
+            <div class="qr-card qr-wa reveal reveal-delay-1">
+                <div class="qr-card-header">
+                    <div class="qr-card-icon">💬</div>
+                    <h3>Konsultasi WhatsApp</h3>
+                    <p>Scan QR Code ini untuk langsung terhubung dengan tim SALINK via WhatsApp dan dapatkan konsultasi cepat.</p>
+                </div>
+
+                <div class="qr-image-wrapper">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fwa.me%2Fmessage%2FL3VQRRSNN7JAP1&bgcolor=FFFFFF&color=0F172A&margin=8&qzone=2"
+                        alt="QR Code WhatsApp Konsultasi SALINK"
+                        width="200"
+                        height="200"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fwa.me%2Fmessage%2FL3VQRRSNN7JAP1';"
+                    >
+                </div>
+
+                <div class="qr-url">https://wa.me/message/L3VQRRSNN7JAP1</div>
+
+                <a
+                    href="https://wa.me/message/L3VQRRSNN7JAP1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="qr-action-btn qr-btn-wa"
+                    aria-label="Konsultasi via WhatsApp"
+                >
+                    <span>💬</span>
+                    Konsultasi
+                </a>
+
+                <p class="qr-hint">
+                    <span>📱</span>
+                    Scan dengan kamera HP atau klik tombol
+                </p>
+            </div>
+
+            <!-- ============ QR CODE 2: APLIKASI SALINK ============ -->
+            <div class="qr-card qr-app reveal reveal-delay-2">
+                <div class="qr-card-header">
+                    <div class="qr-card-icon">🚨</div>
+                    <h3>Aplikasi SALINK</h3>
+                    <p>Scan QR Code ini untuk membuka atau menginstall aplikasi SALINK Emergency Social Platform di perangkat Anda.</p>
+                </div>
+
+                <div class="qr-image-wrapper">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fsalink-emergency.vercel.app%2F&bgcolor=FFFFFF&color=0F172A&margin=8&qzone=2"
+                        alt="QR Code Aplikasi SALINK Emergency Social Platform"
+                        width="200"
+                        height="200"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https%3A%2F%2Fsalink-emergency.vercel.app%2F';"
+                    >
+                </div>
+
+                <div class="qr-url">https://salink-emergency.vercel.app/</div>
+
+                <a
+                    href="https://salink-emergency.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="qr-action-btn qr-btn-app"
+                    aria-label="Scan atau Install Aplikasi SALINK"
+                >
+                    <span>📲</span>
+                    Scan/Install Aplikasi SALINK
+                </a>
+
+                <p class="qr-hint">
+                    <span>🚀</span>
+                    v1.0 Enterprise — Emergency Social Platform
+                </p>
             </div>
         </div>
     </div>
@@ -4118,7 +4479,7 @@
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-card">
                 <span class="sc-emoji">💼</span> Portfolio
             </a>
-            <a href="https://wa.me/6285218483129" target="_blank" rel="noopener noreferrer" class="social-card">
+            <a href="https://wa.me/message/L3VQRRSNN7JAP1" target="_blank" rel="noopener noreferrer" class="social-card">
                 <span class="sc-emoji">💬</span> WhatsApp
             </a>
         </div>
@@ -4128,7 +4489,7 @@
 <div class="section-divider"></div>
 
 <!-- ============================================================
-     FOUNDER — UPDATED WITH PROFILE PHOTO
+     FOUNDER
      ============================================================ -->
 <section class="section" id="founder">
     <div class="container">
@@ -4137,7 +4498,6 @@
             <h2 class="section-title">BUILT WITH PURPOSE.</h2>
         </div>
         <div class="founder-card reveal reveal-delay-2">
-            <!-- Founder Avatar: foto profil dapat diganti admin -->
             <div class="founder-avatar" id="founder-avatar">
                 <img
                     id="founder-photo"
@@ -4159,7 +4519,7 @@
                 <div class="founder-socials">
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
-                    <a href="https://wa.me/6285218483129" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+                    <a href="https://wa.me/message/L3VQRRSNN7JAP1" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -4181,7 +4541,7 @@
                 <i data-lucide="alert-triangle" style="width:20px;height:20px;"></i>
                 MULAI DENGAN SALINK
             </a>
-            <a href="#about" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
+            <a href="#qr-access" class="btn btn-secondary">Scan QR Code</a>
         </div>
         <div class="qr-placeholder reveal reveal-delay-4">
             <div class="qr-box">QR</div>
@@ -4214,7 +4574,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#emergency">Emergency</a></li>
                     <li><a href="#map">Live Map</a></li>
-                    <li><a href="#pillars">Security</a></li>
+                    <li><a href="#qr-access">QR Access</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -4240,7 +4600,7 @@
                 <ul>
                     <li><a href="#contact">Help Center</a></li>
                     <li><a href="#contact">Email</a></li>
-                    <li><a href="https://wa.me/6285218483129" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+                    <li><a href="https://wa.me/message/L3VQRRSNN7JAP1" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
                     <li><a href="#stats">Statistics</a></li>
                 </ul>
             </div>
@@ -4276,9 +4636,9 @@
             <span class="mbn-icon">🚨</span>
             SOS
         </a>
-        <a href="#map" class="mbn-item" aria-label="Peta">
-            <span class="mbn-icon">🗺️</span>
-            Map
+        <a href="#qr-access" class="mbn-item" aria-label="QR Access">
+            <span class="mbn-icon">📱</span>
+            QR
         </a>
         <a href="#contact" class="mbn-item" aria-label="Chat">
             <span class="mbn-icon">💬</span>
@@ -4353,9 +4713,12 @@
    Replace with verified production data before public launch.
 
    === CARA GANTI FOTO FOUNDER (ADMIN) ===
-   1. Ubah URL di SALINK_CONFIG.founder.photo di bawah ini, ATAU
-   2. Ubah langsung atribut src pada <img id="founder-photo"> di HTML.
+   Ubah URL di SALINK_CONFIG.founder.photo di bawah ini.
    Jika URL kosong / gagal dimuat, otomatis fallback ke inisial "KL".
+
+   === CARA GANTI QR CODE (ADMIN) ===
+   Ubah URL di SALINK_CONFIG.qr.whatsapp dan SALINK_CONFIG.qr.app.
+   QR Code akan otomatis di-generate ulang.
    ============================================================ */
 const SALINK_CONFIG = {
     statistics: {
@@ -4377,8 +4740,11 @@ const SALINK_CONFIG = {
         role: "Founder & Developer SALINK",
         organization: "Karang Taruna",
         initials: "KL",
-        // GANTI URL DI BAWAH INI UNTUK MENGUBAH FOTO PROFIL FOUNDER
         photo: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaDd41vi8-fo8HYvHZilnR_N8WzphH5JJ2XvYZD2SG0suHPkGmnD1domdbdhGTtwvEkLEr40bgXtdfRlcvfP-Mtp6rsY9QEdRhg_zFST8-x2m8pgC4gEcBRPa-yKSGS_PVo9qRx8GU2o76FQXAoRmNJSHWjHu0CS3MOB-DkgVx5lglY7TDiHxovnpY/s1280/1000996943.png"
+    },
+    qr: {
+        whatsapp: "https://wa.me/message/L3VQRRSNN7JAP1",
+        app: "https://salink-emergency.vercel.app/"
     }
 };
 // DEMO DATA — Replace with verified production data before public launch.
@@ -4397,30 +4763,25 @@ const SALINK_CONFIG = {
         const initials = document.querySelector('.founder-initials');
         if (!img) return;
 
-        // Terapkan URL dari config jika ada (override HTML)
         if (SALINK_CONFIG.founder && SALINK_CONFIG.founder.photo) {
             img.src = SALINK_CONFIG.founder.photo;
         }
 
-        // Pastikan inisial fallback juga dari config
         if (initials && SALINK_CONFIG.founder && SALINK_CONFIG.founder.initials) {
             initials.textContent = SALINK_CONFIG.founder.initials;
         }
 
-        // Handler sukses load → tampilkan img, sembunyikan inisial
         img.addEventListener('load', function() {
             img.classList.add('loaded');
             img.style.display = 'block';
             if (initials) initials.style.display = 'none';
         });
 
-        // Handler error → sembunyikan img, tampilkan inisial
         img.addEventListener('error', function() {
             img.style.display = 'none';
             if (initials) initials.style.display = 'flex';
         });
 
-        // Jika gambar sudah ter-cache sebelum handler terpasang
         if (img.complete) {
             if (img.naturalWidth > 0) {
                 img.classList.add('loaded');
@@ -4430,6 +4791,48 @@ const SALINK_CONFIG = {
                 img.style.display = 'none';
                 if (initials) initials.style.display = 'flex';
             }
+        }
+    })();
+
+    /* ----------------------------------------------------------
+       0b. QR CODE — ADMIN CONFIG APPLIER
+       ---------------------------------------------------------- */
+    (function applyQRCodes() {
+        function buildQR(url, size) {
+            const encoded = encodeURIComponent(url);
+            return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encoded}&bgcolor=FFFFFF&color=0F172A&margin=8&qzone=2`;
+        }
+
+        // QR WhatsApp
+        const qrWaImg = document.querySelector('.qr-wa .qr-image-wrapper img');
+        const qrWaUrl = document.querySelector('.qr-wa .qr-url');
+        const qrWaBtn = document.querySelector('.qr-wa .qr-action-btn');
+
+        if (qrWaImg && SALINK_CONFIG.qr && SALINK_CONFIG.qr.whatsapp) {
+            qrWaImg.src = buildQR(SALINK_CONFIG.qr.whatsapp, 400);
+            qrWaImg.alt = 'QR Code WhatsApp Konsultasi SALINK — ' + SALINK_CONFIG.qr.whatsapp;
+        }
+        if (qrWaUrl && SALINK_CONFIG.qr) {
+            qrWaUrl.textContent = SALINK_CONFIG.qr.whatsapp;
+        }
+        if (qrWaBtn && SALINK_CONFIG.qr) {
+            qrWaBtn.href = SALINK_CONFIG.qr.whatsapp;
+        }
+
+        // QR App
+        const qrAppImg = document.querySelector('.qr-app .qr-image-wrapper img');
+        const qrAppUrl = document.querySelector('.qr-app .qr-url');
+        const qrAppBtn = document.querySelector('.qr-app .qr-action-btn');
+
+        if (qrAppImg && SALINK_CONFIG.qr && SALINK_CONFIG.qr.app) {
+            qrAppImg.src = buildQR(SALINK_CONFIG.qr.app, 400);
+            qrAppImg.alt = 'QR Code Aplikasi SALINK — ' + SALINK_CONFIG.qr.app;
+        }
+        if (qrAppUrl && SALINK_CONFIG.qr) {
+            qrAppUrl.textContent = SALINK_CONFIG.qr.app;
+        }
+        if (qrAppBtn && SALINK_CONFIG.qr) {
+            qrAppBtn.href = SALINK_CONFIG.qr.app;
         }
     })();
 
@@ -4487,7 +4890,7 @@ const SALINK_CONFIG = {
         }
         animateRing();
 
-        const hoverTargets = document.querySelectorAll('a, button, .adv-card, .strip-card, .step-card, .benefit-card, .map-loc-card, .tab-btn, .social-card, .contact-card, .trust-item, .founder-avatar');
+        const hoverTargets = document.querySelectorAll('a, button, .adv-card, .strip-card, .step-card, .benefit-card, .map-loc-card, .tab-btn, .social-card, .contact-card, .trust-item, .founder-avatar, .qr-card, .qr-action-btn');
         hoverTargets.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorDot.classList.add('hover');
@@ -4536,7 +4939,6 @@ const SALINK_CONFIG = {
         }
     }, { passive: true });
 
-    // Active nav link
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -4572,7 +4974,6 @@ const SALINK_CONFIG = {
         link.addEventListener('click', () => toggleMobileMenu(true));
     });
 
-    // Close on ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (mobileMenu.classList.contains('open')) toggleMobileMenu(true);
@@ -4762,7 +5163,6 @@ const SALINK_CONFIG = {
 
         startAutoplay();
 
-        // Swipe support
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -4914,7 +5314,7 @@ const SALINK_CONFIG = {
     }, 2500);
 
     setTimeout(() => {
-        showToast('📍', 'Location detected', 'Your location has been updated.');
+        showToast('📱', 'QR Access', 'Scan QR Code untuk konsultasi atau install aplikasi SALINK.');
     }, 6000);
 
     setTimeout(() => {
